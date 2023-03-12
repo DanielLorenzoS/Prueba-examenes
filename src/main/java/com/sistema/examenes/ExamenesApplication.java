@@ -24,7 +24,7 @@ public class ExamenesApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		User user = new User();
+		/*User user = new User();
 		user.setName("Daniel");
 		user.setLastname("Lorenzo");
 		user.setUsername("LoreS");
@@ -44,6 +44,6 @@ public class ExamenesApplication implements CommandLineRunner {
 		rolUsers.add(rolUser);
 
 		User savedUser = userService.saveUser(user, rolUsers);
-		System.out.println(savedUser.getUsername());
+		System.out.println(savedUser.getUsername());*/
 	}
 }

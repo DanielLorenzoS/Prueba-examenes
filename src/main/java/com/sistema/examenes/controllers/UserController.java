@@ -5,38 +5,39 @@ import com.sistema.examenes.entities.RolUser;
 import com.sistema.examenes.entities.User;
 import com.sistema.examenes.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class UserController  {
+@RestController
+@RequestMapping("/users")
+public class UserController {
 
-//    @Autowired
-//    private UserService userService;
-//
-//    @Override
-//    public void run(String... args) throws Exception {
-//        User user = new User();
-//        user.setName("Daniel");
-//        user.setLastname("Lorenzo");
-//        user.setUsername("LoreS");
-//        user.setPassword("12345");
-//        user.setEmail("lo@gmail.com");
-//        user.setPhone("52854185");
-//        user.setProfile("photo.png");
-//
-//        Rol rol = new Rol();
-//        rol.setRolId(1L);
-//        rol.setName("ADMIN");
-//
-//        Set<RolUser> rolUsers = new HashSet<>();
-//        RolUser rolUser = new RolUser();
-//        rolUser.setRol(rol);
-//        rolUser.setUser(user);
-//        rolUsers.add(rolUser);
-//
-//        User savedUser = userService.saveUser(user, rolUsers);
-//        System.out.println(savedUser.getUsername());
-//    }
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/")
+    public User saveUser(@RequestBody User user) throws Exception{
+        Set<RolUser> roles = new HashSet<>();
+        Rol rol = new Rol();
+        rol.setRolId(2L);
+        rol.setName("Normal");
+
+        RolUser rolUser = new RolUser();
+        rolUser.setUser(user);
+        rolUser.setRol(rol);
+
+        return userService.saveUser(user, roles);
+    }
+
+    @GetMapping("/{username}")
+    public User getUser(@PathVariable("username") String username) {
+        return userService.getUser(username);
+    }
+
+    @DeleteMapping("/{userId}")
+    public void deleteUser(@PathVariable("userId") Long userId) {
+        userService.deleteUser(userId);
+    }
 }
