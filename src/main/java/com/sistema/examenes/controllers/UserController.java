@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -29,6 +30,11 @@ public class UserController {
         rolUser.setRol(rol);
 
         return userService.saveUser(user, roles);
+    }
+
+    @GetMapping("/")
+    public List<User> getUsers() {
+        return userService.getUsers();
     }
 
     @GetMapping("/{username}")
