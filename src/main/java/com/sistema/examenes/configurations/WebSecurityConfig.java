@@ -1,4 +1,4 @@
-package com.sistema.examenes.configurations;
+package com.example.securingweb;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,11 +18,11 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/users/").permitAll()
+                        .requestMatchers("/", "/home").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
-                        .loginPage("/")
+                        .loginPage("/login")
                         .permitAll()
                 )
                 .logout((logout) -> logout.permitAll());
